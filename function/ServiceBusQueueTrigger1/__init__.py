@@ -7,7 +7,6 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
 ADMIN_EMAIL_ADDRESS = 'jesus.mira1@hotmail.com'
-SENDGRID_API_KEY = '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'
 
 def send_email(email, subject, body):
     message = Mail(
@@ -16,7 +15,7 @@ def send_email(email, subject, body):
         subject=subject,
         plain_text_content=body)
     print('Create SendGridAPIClient')
-    sg = SendGridAPIClient(SENDGRID_API_KEY)
+    sg = SendGridAPIClient(os.environ['SENDGRID_API_KEY'])
     sg.send(message)
 
 
@@ -30,7 +29,7 @@ def main(msg: func.ServiceBusMessage):
     host = "postgresql-server-jmiraal.postgres.database.azure.com"
     dbname = "techconfdb"
     user = "jmiraal@postgresql-server-jmiraal"
-    password = "Vendetta41!"
+    password = os.environ['POSTGRESQL_PASS']
     sslmode = "require"
 
     # Construct connection string
