@@ -61,11 +61,15 @@ You will need to install the following locally:
 ## Monthly Cost Analysis
 Complete a month cost analysis of each Azure resource to give an estimate total cost using the table below:
 
-| Azure Resource | Service Tier | Monthly Cost |
-| ------------ | ------------ | ------------ |
-| *Azure Postgres Database* |     |              |
-| *Azure Service Bus*   |         |              |
-| ...                   |         |              |
+| Azure Resource | Service Tier | Monthly Cost (€) |
+| ------------ | --------------- | ------------ |
+| *Azure Postgres Database* |Basic (1vCore/50GB)    |     30.65 (€)       |
+| *Azure Service Bus*   |Basic         | 0.05/Million (\$)             |
+| *App Service Plan*     |   B1      |        10.47 (€)      |
+| *Azure Storage Account*     |   Standard     |        0,049/GB (€)      |
+| *SendGrid Account*     |   Bronze (40000 emails)     |         9.95 (\$)      |
 
 ## Architecture Explanation
-This is a placeholder section where you can provide an explanation and reasoning for your architecture selection for both the Azure Web App and Azure Function.
+We have placed both, the Azure Web App and Azure Function, in the same App Service Plan. This makes them to have a total monthly cost of 10.47 euros in the B1 tier. We could have deployed the apps in different Free tier plans but we would have had only 60 minutes of computing per day. It is enough for a test app, but it will be likely too low in other cases.
+Additionally, it has the advantage of scaling vertically or horizontally both apps at the same time if it is necessary, which will also reduce the costs.
+Deploying the notification logic in a function app has allowed us to separate the notification sendings in a different process in the background. This will make more agile the navigation experience for the web app users.
