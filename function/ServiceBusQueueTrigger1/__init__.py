@@ -62,8 +62,9 @@ def main(msg: func.ServiceBusMessage):
         for attendee in attendees:
             print('{}, {}, {}'.format({'jesus.mira1@hotmail.com'}, {attendee[2]}, {query_notification}))
             email = attendee[2]
-            custom_subject = subject
-            send_email(email, custom_subject, message)
+            custom_subject = '{}: {}'.format(attendee[0], subject)
+            custom_message = 'Dear {}:\n\n{}'.format(attendee[0], message)
+            send_email(email, custom_subject, custom_message)
 
         # TODO: Update the notification table by setting the completed date and updating the status with the total number of attendees notified
         print("The Function has executed correctly")
